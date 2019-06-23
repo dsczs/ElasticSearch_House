@@ -9,7 +9,7 @@ public class ApiDataTableResponse extends ApiResponse {
     private long recordsTotal;
     private long recordsFiltered;
 
-   
+
     public ApiDataTableResponse(ApiResponse.Status status) {
         this(status.getCode(), status.getStandardMessage(), null);
     }

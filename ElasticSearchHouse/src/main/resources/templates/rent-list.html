@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="Content-language" content="zh-CN"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="applicable-device" content="pc">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="zh-CN" http-equiv="Content-language"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="pc" name="applicable-device">
 
     <title>寻屋</title>
-    <meta name="description" content="方便快捷寻屋"/>
-    <meta name="keywords" content="寻屋"/>
+    <meta content="方便快捷寻屋" name="description"/>
+    <meta content="寻屋" name="keywords"/>
     <link href="/static/css/main.css" rel='stylesheet' type='text/css'/>
     <link href="/static/css/list.css" rel='stylesheet' type='text/css'/>
-    <link href="/static/lib/layui/layui.css" rel="stylesheet" type="text/css" />
-    <link href="/static/lib/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/layui/layui.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/lib/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -23,17 +23,17 @@
     <div class="wrapper">
         <div class="fl" log-mod="search">
             <div class="search-txt">
-                <form class="clear" id="searchForm" action="#" method="get">
+                <form action="#" class="clear" id="searchForm" method="get">
                     <div class="search-tab">
                         <i class="icon" data-bl="switch"></i>
-                        <div data-bl="switch" class="check">关键词</div>
+                        <div class="check" data-bl="switch">关键词</div>
                         <div class="txt-search">
-                            <input class="left txt" name="keyword" autocomplete="off"
-                                   placeholder="如小区名、地铁站等" id="keyword-box"
-                                    th:value="${searchBody.keywords != null} ? ${searchBody.keywords} : ''"/>
+                            <input autocomplete="off" class="left txt" id="keyword-box"
+                                   name="keyword" placeholder="如小区名、地铁站等"
+                                   th:value="${searchBody.keywords != null} ? ${searchBody.keywords} : ''"/>
                         </div>
                     </div>
-                    <button type="submit" class="act-search btn home-ico ico-search LOGCLICKEVTID">
+                    <button class="act-search btn home-ico ico-search LOGCLICKEVTID" type="submit">
                         搜索
                     </button>
                 </form>
@@ -41,7 +41,7 @@
         </div>
         <div class="fr last">
             <div class="ditu fr">
-                <a th:href="@{/rent/house/map(cityEnName=${searchBody.cityEnName})}" target="_blank">
+                <a target="_blank" th:href="@{/rent/house/map(cityEnName=${searchBody.cityEnName})}">
                     <i></i>
                     地图找房
                 </a>
@@ -79,7 +79,7 @@
                             <a data-bind="*"
                                onclick="changeSimpleCondition('regionEnName', '*')">不限</a>
                             <tr th:each="region, regionStat: ${regions}">
-                                <a th:attr="data-bind=${region.enName}" href="javascript:void(0);"
+                                <a href="javascript:void(0);" th:attr="data-bind=${region.enName}"
                                    th:onclick="'changeSimpleCondition(\'regionEnName\', \'' + ${region.enName} + '\')'"
                                    th:text="${region.cnName}"></a>
                             </tr>
@@ -94,7 +94,7 @@
                                onclick="changeSimpleCondition('priceBlock', '*')">不限
                             </a>
                             <tr th:each="priceBlock : ${priceBlocks}">
-                                <a th:attr="data-bind=${priceBlock.key}" href="javascript:void(0);"
+                                <a href="javascript:void(0);" th:attr="data-bind=${priceBlock.key}"
                                    th:onclick="'changeSimpleCondition(\'priceBlock\',\'' + ${priceBlock.key} + '\')'"
                                    th:text="${priceBlock.value.min < 0} ? (${priceBlock.value.max} + '元以下' ):
                                     (${priceBlock.value.max < 0} ? ${priceBlock.value.min} + '元以上' :
@@ -112,7 +112,7 @@
                                onclick="changeSimpleCondition('areaBlock', '*')">不限
                             </a>
                             <tr th:each="areaBlock : ${areaBlocks}">
-                                <a th:attr="data-bind=${areaBlock.key}" href="javascript:void(0);"
+                                <a href="javascript:void(0);" th:attr="data-bind=${areaBlock.key}"
                                    th:onclick="'changeSimpleCondition(\'areaBlock\',\'' + ${areaBlock.key} + '\')'"
                                    th:text="${areaBlock.value.min < 0} ? (${areaBlock.value.max} + '平以下' ):
                                     (${areaBlock.value.max < 0} ? ${areaBlock.value.min} + '平以上' :
@@ -226,27 +226,27 @@
             </div>
             <div class="list-wrap">
 
-                <ul id="house-lst" class="house-lst">
+                <ul class="house-lst" id="house-lst">
                     <tr th:each="house, houseStat: ${houses}">
                         <li>
                             <div class="pic-panel">
                                 <a target="_blank" th:href="'/rent/house/show/' + ${house.id}">
-                                    <img th:src="${house.cover}" th:alt="${house.title}"/>
+                                    <img th:alt="${house.title}" th:src="${house.cover}"/>
                                 </a>
                             </div>
                             <div class="info-panel">
                                 <div>
                                     <h2>
                                         <a target="_blank" th:href="'/rent/house/show/' + ${house.id}"
-                                           th:title="${house.title}" th:text="${house.title}">
+                                           th:text="${house.title}" th:title="${house.title}">
 
                                         </a>
                                     </h2>
                                 </div>
                                 <div class="col-1">
                                     <div class="where">
-                                        <a th:href="@{/rent/house(cityEnName=${searchBody.cityEnName}, search=${house.district})}"
-                                           class="laisuzhou">
+                                        <a class="laisuzhou"
+                                           th:href="@{/rent/house(cityEnName=${searchBody.cityEnName}, search=${house.district})}">
                                             <span class="region" th:text="${house.district} + '&nbsp;&nbsp;'"></span>
                                         </a>
                                         <span class="zone">
@@ -307,9 +307,9 @@
                 </ul>
             </div>
 
-            <div th:if="${!houses.isEmpty()}" id="pageable" class="page-box house-lst-page-box">
+            <div class="page-box house-lst-page-box" id="pageable" th:if="${!houses.isEmpty()}">
             </div>
-            <div th:if="${houses.isEmpty()}" class="page-box house-lst-page-box">
+            <div class="page-box house-lst-page-box" th:if="${houses.isEmpty()}">
                 没有找到相关结果>_<，换个姿势去搜索相关数据吧~
             </div>
         </div>
@@ -317,12 +317,12 @@
 </div>
 </div>
 <div th:include="common :: footer"></div>
-<script type="text/javascript" src="/static/lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="/static/lib/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 <script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[i] = m[i] || function() {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
+    (function (m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
         j = ei.createElement(q),
             s = ei.getElementsByTagName(q)[0];
         j.async = true;
@@ -340,7 +340,7 @@
 
     function locate_url(start, size) {
         var keywords = $('#keyword-box').val();
-        if (typeof(keywords) !== 'undefined' && keywords !== null && keywords.length > 0) {
+        if (typeof (keywords) !== 'undefined' && keywords !== null && keywords.length > 0) {
             data.keywords = keywords;
         }
 
@@ -393,7 +393,7 @@
         $('.room-select a[data-bind="' + [[${searchBody.room}]] + '"]').addClass('on');
         $('.direction-select a[data-bind="' + [[${searchBody.direction}]] + '"]').addClass('on');
         $('.rent-way-select a[data-bind="' + [[${searchBody.rentWay}]] + '"]').addClass('on');
-        $('#sort-bar').find('div[data-bind="' + data.orderBy +  '"]').addClass('on');
+        $('#sort-bar').find('div[data-bind="' + data.orderBy + '"]').addClass('on');
 
         if (data.orderBy === 'area') {
             var areaSpanText = '';

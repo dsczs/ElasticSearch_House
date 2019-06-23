@@ -1,7 +1,5 @@
 package com.lcz.base;
 
-import com.lcz.entity.HouseSubscribe;
-
 /**
  * 预约状态码
  * Created by codingchaozhang.
@@ -18,10 +16,6 @@ public enum HouseSubscribeStatus {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public static HouseSubscribeStatus of(int value) {
         for (HouseSubscribeStatus status : HouseSubscribeStatus.values()) {
             if (status.getValue() == value) {
@@ -29,5 +23,9 @@ public enum HouseSubscribeStatus {
             }
         }
         return HouseSubscribeStatus.NO_SUBSCRIBE;
+    }
+
+    public int getValue() {
+        return value;
     }
 }

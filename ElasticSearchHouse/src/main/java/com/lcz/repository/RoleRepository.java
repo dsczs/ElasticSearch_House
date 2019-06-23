@@ -1,15 +1,15 @@
 package com.lcz.repository;
 
-import java.util.List;
-
+import com.lcz.entity.Role;
 import org.springframework.data.repository.CrudRepository;
 
-import com.lcz.entity.Role;
+import java.util.List;
+
 /**
  * 角色数据DAO
- * @author LvChaoZhang
  *
+ * @author LvChaoZhang
  */
 public interface RoleRepository extends CrudRepository<Role, Long> {
-	List<Role> findRolesByUserId(Long userId);
+    List<Role> findRolesByUserId(Long userId);
 }

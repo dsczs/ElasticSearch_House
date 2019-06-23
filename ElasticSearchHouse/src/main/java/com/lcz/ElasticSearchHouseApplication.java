@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ElasticSearchHouseApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ElasticSearchHouseApplication.class, args);
-	}
-	@GetMapping("/hello")
-	public String hello() {
-		return "hello,lcz";
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ElasticSearchHouseApplication.class, args);
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello,lcz";
+    }
 }

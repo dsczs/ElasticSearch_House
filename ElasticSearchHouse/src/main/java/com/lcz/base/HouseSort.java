@@ -1,10 +1,9 @@
 package com.lcz.base;
 
-import java.util.Set;
-
+import com.google.common.collect.Sets;
 import org.springframework.data.domain.Sort;
 
-import com.google.common.collect.Sets;
+import java.util.Set;
 
 /**
  * 排序生成器
@@ -17,7 +16,7 @@ public class HouseSort {
 
 
     private static final Set<String> SORT_KEYS = Sets.newHashSet(
-        DEFAULT_SORT_KEY,
+            DEFAULT_SORT_KEY,
             "createTime",
             "price",
             "area",

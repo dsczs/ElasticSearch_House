@@ -1,8 +1,8 @@
 package com.lcz.base;
 
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
+
+import java.util.Map;
 
 /**
  * 带区间的常用数值定义
@@ -48,6 +48,22 @@ public class RentValueBlock {
         this.max = max;
     }
 
+    public static RentValueBlock matchPrice(String key) {
+        RentValueBlock block = PRICE_BLOCK.get(key);
+        if (block == null) {
+            return ALL;
+        }
+        return block;
+    }
+
+    public static RentValueBlock matchArea(String key) {
+        RentValueBlock block = AREA_BLOCK.get(key);
+        if (block == null) {
+            return ALL;
+        }
+        return block;
+    }
+
     public String getKey() {
         return key;
     }
@@ -70,21 +86,5 @@ public class RentValueBlock {
 
     public void setMax(int max) {
         this.max = max;
-    }
-
-    public static RentValueBlock matchPrice(String key) {
-        RentValueBlock block = PRICE_BLOCK.get(key);
-        if (block == null) {
-            return ALL;
-        }
-        return block;
-    }
-
-    public static RentValueBlock matchArea(String key) {
-        RentValueBlock block = AREA_BLOCK.get(key);
-        if (block == null) {
-            return ALL;
-        }
-        return block;
     }
 }

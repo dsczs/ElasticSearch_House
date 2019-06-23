@@ -1,30 +1,5 @@
 package com.lcz.web.controller.admin;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.lcz.base.ApiDataTableResponse;
@@ -50,56 +25,85 @@ import com.lcz.web.form.DatatableSearch;
 import com.lcz.web.form.HouseForm;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 @Controller
 public class AdminController {
-	 @Autowired
-	 private IQiNiuService qiNiuService;
-	
-	  @Autowired
-	  private IAddressService addressService;
-	  
-	  @Autowired
-	  private IHouseService houseService;
-	  
-      @Autowired
-      private IUserService userService;
+    @Autowired
+    private IQiNiuService qiNiuService;
 
-	  @Autowired
-	  private Gson gson;
-	/**
+    @Autowired
+    private IAddressService addressService;
+
+    @Autowired
+    private IHouseService houseService;
+
+    @Autowired
+    private IUserService userService;
+
+    @Autowired
+    private Gson gson;
+
+    /**
      * 后台管理中心
+     *
      * @return
      */
-	@GetMapping("/admin/center")
-	public String adminCenterPage() {
-		return "admin/center";
-	}
+    @GetMapping("/admin/center")
+    public String adminCenterPage() {
+        return "admin/center";
+    }
 
     /**
      * 欢迎页
+     *
      * @return
      */
-	@GetMapping("/admin/welcome")
-	public String welcomePage() {
-		return "admin/welcome";
-	}
-	 /**
+    @GetMapping("/admin/welcome")
+    public String welcomePage() {
+        return "admin/welcome";
+    }
+
+    /**
      * 管理员登录页
+     *
      * @return
      */
-	@GetMapping("/admin/login")
-	public String adminLoginPage() {
-		return "admin/login";
-	}
-	 /**
+    @GetMapping("/admin/login")
+    public String adminLoginPage() {
+        return "admin/login";
+    }
+
+    /**
      * 房源列表页
+     *
      * @return
      */
     @GetMapping("admin/house/list")
     public String houseListPage() {
         return "admin/house-list";
     }
+
     @PostMapping("admin/houses")
     @ResponseBody
     public ApiDataTableResponse houses(@ModelAttribute DatatableSearch searchBody) {
@@ -113,14 +117,16 @@ public class AdminController {
         response.setDraw(searchBody.getDraw());
         return response;
     }
+
     /**
      * 新增房源功能页
+     *
      * @return
      */
-	@GetMapping("admin/add/house")
-	public String addHousePage() {
-		return "admin/house-add";
-	}
+    @GetMapping("admin/add/house")
+    public String addHousePage() {
+        return "admin/house-add";
+    }
 //	/**
 //     * 本地上传图片接口
 //     * @param file
@@ -142,9 +148,10 @@ public class AdminController {
 //		}
 //        return ApiResponse.ofSuccess(null);
 //    }
-	
-	/**
+
+    /**
      * 上传图片接口
+     *
      * @param file
      * @return
      */
@@ -179,11 +186,11 @@ public class AdminController {
             return ApiResponse.ofStatus(ApiResponse.Status.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @PostMapping("admin/add/house")
     @ResponseBody
     public ApiResponse addHouse(@Valid @ModelAttribute("form-house-add") HouseForm houseForm, BindingResult bindingResult) {
-    	if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return new ApiResponse(HttpStatus.BAD_REQUEST.value(), bindingResult.getAllErrors().get(0).getDefaultMessage(), null);
         }
 
@@ -199,29 +206,31 @@ public class AdminController {
             return ApiResponse.ofSuccess(result.getResult());
         }
 
-        return ApiResponse.ofSuccess(ApiResponse.Status.NOT_VALID_PARAM); 	
+        return ApiResponse.ofSuccess(ApiResponse.Status.NOT_VALID_PARAM);
     }
+
     /**
      * 房源信息编辑页
+     *
      * @return
      */
     @GetMapping("admin/house/edit")
     public String houseEditPage(@RequestParam(value = "id") Long id, Model model) {
-    	if (id == null || id < 1) {
+        if (id == null || id < 1) {
             return "404";
         }
-    	ServiceResult<HouseDTO> serviceResult = houseService.findCompleteOne(id);
+        ServiceResult<HouseDTO> serviceResult = houseService.findCompleteOne(id);
         if (!serviceResult.isSuccess()) {
-             return "404";
+            return "404";
         }
-        
+
         HouseDTO result = serviceResult.getResult();
         model.addAttribute("house", result);
-        
+
         Map<SupportAddress.Level, SupportAddressDTO> addressMap = addressService.findCityAndRegion(result.getCityEnName(), result.getRegionEnName());
         model.addAttribute("city", addressMap.get(SupportAddress.Level.CITY));
         model.addAttribute("region", addressMap.get(SupportAddress.Level.REGION));
-        
+
         HouseDetailDTO detailDTO = result.getHouseDetail();
         ServiceResult<SubwayDTO> subwayServiceResult = addressService.findSubway(detailDTO.getSubwayLineId());
         if (subwayServiceResult.isSuccess()) {
@@ -235,7 +244,7 @@ public class AdminController {
 
         return "admin/house-edit";
     }
-    
+
     /**
      * 编辑接口
      */
@@ -261,8 +270,10 @@ public class AdminController {
         response.setMessage(result.getMessage());
         return response;
     }
+
     /**
      * 移除图片接口
+     *
      * @param id
      * @return
      */
@@ -280,6 +291,7 @@ public class AdminController {
 
     /**
      * 修改封面接口
+     *
      * @param coverId
      * @param targetId
      * @return
@@ -299,6 +311,7 @@ public class AdminController {
 
     /**
      * 增加标签接口
+     *
      * @param houseId
      * @param tag
      * @return
@@ -321,6 +334,7 @@ public class AdminController {
 
     /**
      * 移除标签接口
+     *
      * @param houseId
      * @param tag
      * @return
@@ -340,8 +354,10 @@ public class AdminController {
             return ApiResponse.ofMessage(HttpStatus.BAD_REQUEST.value(), result.getMessage());
         }
     }
+
     /**
      * 审核接口
+     *
      * @param id
      * @param operation
      * @return
@@ -378,10 +394,12 @@ public class AdminController {
         return ApiResponse.ofMessage(HttpStatus.BAD_REQUEST.value(),
                 result.getMessage());
     }
+
     @GetMapping("admin/house/subscribe")
     public String houseSubscribe() {
         return "admin/subscribe";
     }
+
     @GetMapping("admin/house/subscribe/list")
     @ResponseBody
     public ApiResponse subscribeList(@RequestParam(value = "draw") int draw,
@@ -396,6 +414,7 @@ public class AdminController {
         response.setRecordsTotal(result.getTotal());
         return response;
     }
+
     @GetMapping("admin/user/{userId}")
     @ResponseBody
     public ApiResponse getUserInfo(@PathVariable(value = "userId") Long userId) {
@@ -410,7 +429,7 @@ public class AdminController {
             return ApiResponse.ofSuccess(serviceResult.getResult());
         }
     }
-    
+
     @PostMapping("admin/finish/subscribe")
     @ResponseBody
     public ApiResponse finishSubscribe(@RequestParam(value = "house_id") Long houseId) {

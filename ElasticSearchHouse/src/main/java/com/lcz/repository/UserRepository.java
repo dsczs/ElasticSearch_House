@@ -1,22 +1,19 @@
 package com.lcz.repository;
 /**
- * 
  * @author LvChaoZhang
- *
  */
 
+import com.lcz.entity.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.lcz.entity.User;
-
 
 public interface UserRepository extends CrudRepository<User, Long> {
-	User findByName(String userName);
-	
-	User findUserByPhoneNumber(String telephone);
+    User findByName(String userName);
+
+    User findUserByPhoneNumber(String telephone);
 
     @Modifying
     @Query("update User as user set user.name = :name where id = :id")

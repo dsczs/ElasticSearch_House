@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
  * 索引结构模板
  * Created by codingchaozhang.
  */

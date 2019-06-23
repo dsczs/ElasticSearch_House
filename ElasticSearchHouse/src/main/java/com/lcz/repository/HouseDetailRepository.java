@@ -1,13 +1,12 @@
 package com.lcz.repository;
 
-import java.util.List;
-
+import com.lcz.entity.HouseDetail;
 import org.springframework.data.repository.CrudRepository;
 
-import com.lcz.entity.HouseDetail;
+import java.util.List;
 
-public interface HouseDetailRepository extends CrudRepository<HouseDetail, Long>{
+public interface HouseDetailRepository extends CrudRepository<HouseDetail, Long> {
     HouseDetail findByHouseId(Long houseId);
 
-	List<HouseDetail> findAllByHouseIdIn(List<Long> houseIds);
+    List<HouseDetail> findAllByHouseIdIn(List<Long> houseIds);
 }

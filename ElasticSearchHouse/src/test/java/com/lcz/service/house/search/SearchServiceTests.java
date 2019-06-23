@@ -1,13 +1,12 @@
 package com.lcz.service.house.search;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.lcz.ApplicationTests;
 import com.lcz.service.ServiceMultiResult;
 import com.lcz.service.search.ISearchService;
 import com.lcz.web.form.RentSearch;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by codingchaozhang.

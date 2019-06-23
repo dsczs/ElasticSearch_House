@@ -1,21 +1,5 @@
 package com.lcz.web.controller.house;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.lcz.base.ApiResponse;
 import com.lcz.base.RentValueBlock;
 import com.lcz.entity.SupportAddress;
@@ -33,10 +17,24 @@ import com.lcz.web.dto.SupportAddressDTO;
 import com.lcz.web.dto.UserDTO;
 import com.lcz.web.form.MapSearch;
 import com.lcz.web.form.RentSearch;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HouseController {
-	@Autowired
+    @Autowired
     private IAddressService addressService;
 
 
@@ -45,9 +43,10 @@ public class HouseController {
 
     @Autowired
     private IUserService userService;
-    
+
     @Autowired
     private ISearchService searchService;
+
     /**
      * 自动补全接口
      */
@@ -61,24 +60,26 @@ public class HouseController {
         ServiceResult<List<String>> result = this.searchService.suggest(prefix);
         return ApiResponse.ofSuccess(result.getResult());
     }
-  
-	/**
+
+    /**
      * 获取支持城市列表
+     *
      * @return
      */
-	@GetMapping("address/support/cities")
-	@ResponseBody
-	public ApiResponse getSupportCities() {
-		ServiceMultiResult<SupportAddressDTO> result = addressService.findAllCities();
+    @GetMapping("address/support/cities")
+    @ResponseBody
+    public ApiResponse getSupportCities() {
+        ServiceMultiResult<SupportAddressDTO> result = addressService.findAllCities();
         if (result.getResultSize() == 0) {
             return ApiResponse.ofStatus(ApiResponse.Status.NOT_FOUND);
         }
         return ApiResponse.ofSuccess(result.getResult());
-	}
-	
+    }
+
 
     /**
      * 获取对应城市支持区域列表
+     *
      * @param cityEnName
      * @return
      */
@@ -94,6 +95,7 @@ public class HouseController {
 
     /**
      * 获取具体城市所支持的地铁线路
+     *
      * @param cityEnName
      * @return
      */
@@ -110,6 +112,7 @@ public class HouseController {
 
     /**
      * 获取对应地铁线路所支持的地铁站点
+     *
      * @param subwayId
      * @return
      */
@@ -123,6 +126,7 @@ public class HouseController {
 
         return ApiResponse.ofSuccess(stationDTOS);
     }
+
     @GetMapping("rent/house")
     public String rentHousePage(@ModelAttribute RentSearch rentSearch,
                                 Model model, HttpSession session,
@@ -172,6 +176,7 @@ public class HouseController {
 
         return "rent-list";
     }
+
     @GetMapping("rent/house/show/{id}")
     public String show(@PathVariable(value = "id") Long houseId,
                        Model model) {
@@ -203,6 +208,7 @@ public class HouseController {
 
         return "house-detail";
     }
+
     @GetMapping("rent/house/map")
     public String rentMapPage(@RequestParam(value = "cityEnName") String cityEnName,
                               Model model,
@@ -227,6 +233,7 @@ public class HouseController {
         model.addAttribute("regions", regions.getResult());
         return "rent-map";
     }
+
     @GetMapping("rent/house/map/houses")
     @ResponseBody
     public ApiResponse rentMapHouses(@ModelAttribute MapSearch mapSearch) {

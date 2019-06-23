@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "support_address")
 public class SupportAddress {
-	 @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -32,8 +32,64 @@ public class SupportAddress {
 
     @Column(name = "baidu_map_lat")
     private double baiduMapLatitude;
-    
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getBelongTo() {
+        return belongTo;
+    }
+
+    public void setBelongTo(String belongTo) {
+        this.belongTo = belongTo;
+    }
+
+    public String getEnName() {
+        return enName;
+    }
+
+    public void setEnName(String enName) {
+        this.enName = enName;
+    }
+
+    public String getCnName() {
+        return cnName;
+    }
+
+    public void setCnName(String cnName) {
+        this.cnName = cnName;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public double getBaiduMapLongitude() {
+        return baiduMapLongitude;
+    }
+
+    public void setBaiduMapLongitude(double baiduMapLongitude) {
+        this.baiduMapLongitude = baiduMapLongitude;
+    }
+
+    public double getBaiduMapLatitude() {
+        return baiduMapLatitude;
+    }
+
+    public void setBaiduMapLatitude(double baiduMapLatitude) {
+        this.baiduMapLatitude = baiduMapLatitude;
+    }
+
+
     /**
      * 行政级别定义
      */
@@ -47,10 +103,6 @@ public class SupportAddress {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
-
         public static Level of(String value) {
             for (Level level : Level.values()) {
                 if (level.getValue().equals(value)) {
@@ -60,77 +112,11 @@ public class SupportAddress {
 
             throw new IllegalArgumentException();
         }
+
+        public String getValue() {
+            return value;
+        }
     }
 
 
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public String getBelongTo() {
-		return belongTo;
-	}
-
-
-	public void setBelongTo(String belongTo) {
-		this.belongTo = belongTo;
-	}
-
-
-	public String getEnName() {
-		return enName;
-	}
-
-
-	public void setEnName(String enName) {
-		this.enName = enName;
-	}
-
-
-	public String getCnName() {
-		return cnName;
-	}
-
-
-	public void setCnName(String cnName) {
-		this.cnName = cnName;
-	}
-
-
-	public String getLevel() {
-		return level;
-	}
-
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-
-	public double getBaiduMapLongitude() {
-		return baiduMapLongitude;
-	}
-
-
-	public void setBaiduMapLongitude(double baiduMapLongitude) {
-		this.baiduMapLongitude = baiduMapLongitude;
-	}
-
-
-	public double getBaiduMapLatitude() {
-		return baiduMapLatitude;
-	}
-
-
-	public void setBaiduMapLatitude(double baiduMapLatitude) {
-		this.baiduMapLatitude = baiduMapLatitude;
-	}
-    
-    
 }

@@ -1,16 +1,14 @@
 package com.lcz.repository;
 
-import java.util.List;
-
+import com.lcz.entity.Subway;
 import org.springframework.data.repository.CrudRepository;
 
-import com.lcz.entity.Subway;
-
+import java.util.List;
 
 
 /**
  * Created by codingchaozhang.
  */
-public interface SubwayRepository extends CrudRepository<Subway, Long>{
+public interface SubwayRepository extends CrudRepository<Subway, Long> {
     List<Subway> findAllByCityEnName(String cityEnName);
 }

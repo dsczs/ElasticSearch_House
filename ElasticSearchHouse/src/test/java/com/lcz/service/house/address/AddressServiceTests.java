@@ -1,13 +1,12 @@
 package com.lcz.service.house.address;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.lcz.ApplicationTests;
 import com.lcz.service.ServiceResult;
 import com.lcz.service.house.IAddressService;
 import com.lcz.service.search.BaiduMapLocation;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by codingchaozhang.
@@ -24,8 +23,8 @@ public class AddressServiceTests extends ApplicationTests {
 
         Assert.assertTrue(serviceResult.isSuccess());
 
-        Assert.assertTrue(serviceResult.getResult().getLongitude() > 0 );
-        Assert.assertTrue(serviceResult.getResult().getLatitude() > 0 );
+        Assert.assertTrue(serviceResult.getResult().getLongitude() > 0);
+        Assert.assertTrue(serviceResult.getResult().getLatitude() > 0);
 
     }
 }

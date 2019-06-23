@@ -15,6 +15,8 @@ public class RentSearch {
     private int rentWay = -1;
     private String orderBy = "lastUpdateTime";
     private String orderDirection = "desc";
+    private int start = 0;
+    private int size = 5;
 
     public int getDirection() {
         return direction;
@@ -23,10 +25,6 @@ public class RentSearch {
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
-    private int start = 0;
-
-    private int size = 5;
 
     public String getCityEnName() {
         return cityEnName;

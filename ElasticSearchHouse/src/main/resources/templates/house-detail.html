@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="Content-language" content="zh-CN"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="applicable-device" content="pc">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="zh-CN" http-equiv="Content-language"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="pc" name="applicable-device">
 
     <title>寻屋</title>
-    <meta name="description" content="方便快捷寻屋"/>
-    <meta name="keywords" content="寻屋"/>
+    <meta content="方便快捷寻屋" name="description"/>
+    <meta content="寻屋" name="keywords"/>
     <link href="/static/css/main.css" rel='stylesheet' type='text/css'/>
     <link href="/static/css/list.css" rel='stylesheet' type='text/css'/>
     <link href="/static/lib/layui/layui.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="/static/css/detail.css" type="text/css"/>
+    <link href="/static/css/detail.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <header th:replace="common :: header"></header>
@@ -22,16 +22,16 @@
     <div class="wrapper">
         <div class="fl" log-mod="search">
             <div class="search-txt">
-                <form class="clear" id="searchForm" action="#" th:action="@{/rent/house}" method="post">
+                <form action="#" class="clear" id="searchForm" method="post" th:action="@{/rent/house}">
                     <div class="search-tab"><i class="icon" data-bl="switch"></i>
-                        <div data-bl="switch" class="check">关键词</div>
+                        <div class="check" data-bl="switch">关键词</div>
 
                         <div class="txt-search">
-                            <input class="left txt" name="keyword" autocomplete="off"
-                                   placeholder="如小区名、地铁站、房屋朝向等" id="keyword-box">
+                            <input autocomplete="off" class="left txt" id="keyword-box"
+                                   name="keyword" placeholder="如小区名、地铁站、房屋朝向等">
                         </div>
                     </div>
-                    <button type="submit" class="act-search btn home-ico ico-search LOGCLICKEVTID">
+                    <button class="act-search btn home-ico ico-search LOGCLICKEVTID" type="submit">
                         搜索
                     </button>
                 </form>
@@ -39,7 +39,7 @@
         </div>
         <div class="fr last">
             <div class="ditu fr">
-                <a th:href="@{/rent/house/map(cityEnName=${city.enName})}" target="_blank">
+                <a target="_blank" th:href="@{/rent/house/map(cityEnName=${city.enName})}">
                     <i></i>
                     地图找房
                 </a>
@@ -70,8 +70,9 @@
                 <div class="sub" th:text="${house.houseDetail.description}">这个经纪人很懒，没写核心卖点</div>
             </div>
             <div class="btnContainer ">
-                <button id="subscribe" th:switch="${house.subscribeStatus}"
-                        th:attr="data-bind=${house.subscribeStatus}" th:style="${house.subscribeStatus != 0} ? 'background-color: #6a7b8c; color: black;'">
+                <button id="subscribe" th:attr="data-bind=${house.subscribeStatus}"
+                        th:style="${house.subscribeStatus != 0} ? 'background-color: #6a7b8c; color: black;'"
+                        th:switch="${house.subscribeStatus}">
                     <span th:case="1">已加入待看</span>
                     <span th:case="2">已预约时间</span>
                     <span th:case="3">已看过此房</span>
@@ -143,17 +144,17 @@
             </div>
             <div class="brokerInfo" log-mod="zufang_detail_diamond-first">
                 <a href="#">
-                    <img class="LOGCLICK" data-log_id="20001" data-bl="agent" data-el="1000000020276906"
-                         th:src="${agent.avatar}" alt="经纪人">
+                    <img alt="经纪人" class="LOGCLICK" data-bl="agent" data-el="1000000020276906"
+                         data-log_id="20001" th:src="${agent.avatar}">
                 </a>
                 <div class="brokerInfoText">
                     <div class="brokerName">
-                        <a href="#" class="name LOGCLICK" data-log_id="20001"
-                           data-bl="agent" data-el="1000000020276906" th:text="${agent.name}">经纪人</a>
+                        <a class="name LOGCLICK" data-bl="agent" data-el="1000000020276906"
+                           data-log_id="20001" href="#" th:text="${agent.name}">经纪人</a>
                         <span class="tag ">高级经纪人</span>
-                        <a class="LOGCLICK" data-log_id="20001" data-bl="agentim"
-                           data-el="1000000020276906" style="display: none;" title="在线咨询"
-                           data-ucid="1000000020276906">
+                        <a class="LOGCLICK" data-bl="agentim" data-el="1000000020276906"
+                           data-log_id="20001" data-ucid="1000000020276906" style="display: none;"
+                           title="在线咨询">
                         </a>
                     </div>
                     <div class="evaluate">
@@ -179,7 +180,7 @@
             <a class="force" href="#introduction">房源介绍</a>
         </li>
         <li>
-            <a href="#around" class="">周边配套</a>
+            <a class="" href="#around">周边配套</a>
         </li>
     </ul>
 </div>
@@ -322,13 +323,13 @@
     </div>
 </div>
 
-<div id="only" data-city="bj" data-page="zufang_view"></div>
+<div data-city="bj" data-page="zufang_view" id="only"></div>
 <div th:include="common :: footer"></div>
 <script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[i] = m[i] || function() {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
+    (function (m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
         j = ei.createElement(q),
             s = ei.getElementsByTagName(q)[0];
         j.async = true;

@@ -1,8 +1,8 @@
 package com.lcz.web.form;
 
-import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * Created by codingchaozhang.

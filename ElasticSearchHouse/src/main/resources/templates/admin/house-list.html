@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/lib/datatables/1.10.15/jquery.dataTables.css">
+    <link href="/static/lib/datatables/1.10.15/jquery.dataTables.css" rel="stylesheet" type="text/css">
     <div th:include="admin/common :: head"></div>
-    <link rel="stylesheet" type="text/css" href="/static/css/admin/house-list.css">
+    <link href="/static/css/admin/house-list.css" rel="stylesheet" type="text/css">
 
     <!--[if lt IE 9]>
     <script type="text/javascript" src="/static/lib/html5shiv.js"></script>
@@ -15,18 +15,18 @@
 <nav class="breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 房源管理
     <span class="c-gray en">&gt;</span> 房源列表
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-       href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i>
+    <a class="btn btn-success radius r" href="javascript:location.replace(location.href);"
+       style="line-height:1.6em;margin-top:3px" title="刷新"><i class="Hui-iconfont">&#xe68f;</i>
     </a>
 </nav>
 <div class="text-c">
 
 </div>
 <div class="cl pd-5 bg-1 bk-gray mt-20">
-    <button onclick="removeIframe()" class="btn btn-primary radius">关闭选项卡</button>
+    <button class="btn btn-primary radius" onclick="removeIframe()">关闭选项卡</button>
     <span class="l">
-        <a class="btn btn-primary radius" data-title="添加房源" data-href="/admin/add/house"
-           onclick="Hui_admin_tab(this)" href="javascript:;">
+        <a class="btn btn-primary radius" data-href="/admin/add/house" data-title="添加房源"
+           href="javascript:;" onclick="Hui_admin_tab(this)">
             <i class="Hui-iconfont">&#xe600;</i>添加房源</a>&nbsp;&nbsp;
     </span>
 </div>
@@ -34,31 +34,31 @@
 <div class="page-container">
     <div class="text-c">
         <span class="select-box inline">
-            <select id="city" name="city" class="select">
+            <select class="select" id="city" name="city">
                 <option value="">所有城市</option>
             </select>
         </span>
         <span class="select-box inline">
-            <select id="houseStatus" name="houseStatus" class="select">
+            <select class="select" id="houseStatus" name="houseStatus">
                 <option value="">全部房源</option>
                 <option value="0">待审核</option>
                 <option value="1">已发布</option>
                 <option value="2">已出租</option>
             </select>
 		</span> 创建时间：
-        <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'createTimeMax\')||\'%y-%M-%d\'}' })"
-               id="createTimeMin" class="input-text Wdate" style="width:110px;">
+        <input class="input-text Wdate" id="createTimeMin"
+               onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'createTimeMax\')||\'%y-%M-%d\'}' })" style="width:110px;" type="text">
         -
-        <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'createTimeMin\')}',maxDate:'%y-%M-%d' })"
-               id="createTimeMax" class="input-text Wdate" style="width:110px;">
-        <input type="text" name="houseTitle" id="houseTitle" placeholder=" 房源标题" style="width:250px" class="input-text">
-        <button id="houseSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>
+        <input class="input-text Wdate" id="createTimeMax"
+               onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'createTimeMin\')}',maxDate:'%y-%M-%d' })" style="width:110px;" type="text">
+        <input class="input-text" id="houseTitle" name="houseTitle" placeholder=" 房源标题" style="width:250px" type="text">
+        <button class="btn btn-success" id="houseSearch" type="submit"><i class="Hui-iconfont">&#xe665;</i>
             搜房源
         </button>
     </div>
     <div class="mt-20">
-        <table id="data-table"
-               class="table table-border table-bordered table-bg table-hover table-sort table-responsive"
+        <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive"
+               id="data-table"
                style="width: 100%">
             <thead>
             <tr class="text-c">
@@ -82,9 +82,9 @@
 
 <footer th:include="admin/common :: footer"></footer>
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="/static/lib/datatables/1.10.15/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
-<script type="text/javascript" src="/static/js/admin/house-list.js"></script>
+<script src="/static/lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript"></script>
+<script src="/static/lib/datatables/1.10.15/jquery.dataTables.js" type="text/javascript"></script>
+<script src="/static/lib/laypage/1.2/laypage.js" type="text/javascript"></script>
+<script src="/static/js/admin/house-list.js" type="text/javascript"></script>
 </body>
 </html>

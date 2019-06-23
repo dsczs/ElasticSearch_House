@@ -1,10 +1,9 @@
 package com.lcz.base;
 
-import java.util.regex.Pattern;
-
+import com.lcz.entity.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.lcz.entity.User;
+import java.util.regex.Pattern;
 
 /**
  * Created by codingchaozhang.
@@ -15,7 +14,7 @@ public class LoginUserUtil {
 
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-    
+
     public static User load() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -36,7 +35,7 @@ public class LoginUserUtil {
 
     /**
      * 验证手机号码
-     *
+     * <p>
      * 移动号码段:139、138、137、136、135、134、150、151、152、157、158、159、182、183、187、188、147
      * 联通号码段:130、131、132、136、185、186、145
      * 电信号码段:133、153、180、189
@@ -50,6 +49,7 @@ public class LoginUserUtil {
 
     /**
      * 验证一般的英文邮箱
+     *
      * @param target 目标邮箱
      * @return 如果符合邮箱规则 返回true; 反之,返回false
      */

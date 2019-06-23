@@ -1,10 +1,9 @@
 package com.lcz.security;
 
-import java.util.Objects;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.lcz.base.LoginUserUtil;
+import com.lcz.entity.User;
+import com.lcz.service.ISmsService;
+import com.lcz.service.IUserService;
 import org.elasticsearch.common.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,10 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.lcz.base.LoginUserUtil;
-import com.lcz.entity.User;
-import com.lcz.service.ISmsService;
-import com.lcz.service.IUserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * Created by codingchaozhang.

@@ -1,9 +1,7 @@
 package com.lcz.web.dto;
 
-import java.util.List;
-
 /**
- * 
+ *
  */
 public class SubwayDTO {
     private Long id;

@@ -2,7 +2,6 @@ package com.lcz.service;
 
 /**
  * 服务接口通用结构
- * 
  */
 public class ServiceResult<T> {
     private boolean success;
@@ -22,6 +21,20 @@ public class ServiceResult<T> {
         this.success = success;
         this.message = message;
         this.result = result;
+    }
+
+    public static <T> ServiceResult<T> success() {
+        return new ServiceResult<>(true);
+    }
+
+    public static <T> ServiceResult<T> of(T result) {
+        ServiceResult<T> serviceResult = new ServiceResult<>(true);
+        serviceResult.setResult(result);
+        return serviceResult;
+    }
+
+    public static <T> ServiceResult<T> notFound() {
+        return new ServiceResult<>(false, Message.NOT_FOUND.getValue());
     }
 
     public boolean isSuccess() {
@@ -46,20 +59,6 @@ public class ServiceResult<T> {
 
     public void setResult(T result) {
         this.result = result;
-    }
-
-    public static <T> ServiceResult<T> success() {
-        return new ServiceResult<>(true);
-    }
-
-    public static <T> ServiceResult<T> of(T result) {
-        ServiceResult<T> serviceResult = new ServiceResult<>(true);
-        serviceResult.setResult(result);
-        return serviceResult;
-    }
-
-    public static <T> ServiceResult<T> notFound() {
-        return new ServiceResult<>(false, Message.NOT_FOUND.getValue());
     }
 
     public enum Message {

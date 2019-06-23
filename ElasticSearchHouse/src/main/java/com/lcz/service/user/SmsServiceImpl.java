@@ -1,14 +1,5 @@
 package com.lcz.service.user;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
-
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
@@ -19,30 +10,46 @@ import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.lcz.service.ISmsService;
 import com.lcz.service.ServiceResult;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by 瓦力.
  */
 @Service
 public class SmsServiceImpl implements ISmsService, InitializingBean {
-    @Value("${aliyun.sms.accessKey}")
-    private String accessKey;
-
-    @Value("${aliyun.sms.accessKeySecret}")
-    private String secertKey;
-
-    @Value("${aliyun.sms.template.code}")
-    private String templateCode;
-
-    private IAcsClient acsClient;
-
     private final static String SMS_CODE_CONTENT_PREFIX = "SMS::CODE::CONTENT";
-
     private static final String[] NUMS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
     private static final Random random = new Random();
-
+    @Value("${aliyun.sms.accessKey}")
+    private String accessKey;
+    @Value("${aliyun.sms.accessKeySecret}")
+    private String secertKey;
+    @Value("${aliyun.sms.template.code}")
+    private String templateCode;
+    private IAcsClient acsClient;
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    /**
+     * 6位验证码生成器
+     *
+     * @return
+     */
+    private static String generateRandomSmsCode() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            int index = random.nextInt(10);
+            sb.append(NUMS[index]);
+        }
+        return sb.toString();
+    }
 
     @Override
     public ServiceResult<String> sendSms(String telephone) {
@@ -109,18 +116,5 @@ public class SmsServiceImpl implements ISmsService, InitializingBean {
         DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         this.acsClient = new DefaultAcsClient(profile);
 
-    }
-
-    /**
-     * 6位验证码生成器
-     * @return
-     */
-    private static String generateRandomSmsCode() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 6; i++) {
-            int index = random.nextInt(10);
-            sb.append(NUMS[index]);
-        }
-        return sb.toString();
     }
 }

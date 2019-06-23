@@ -1,7 +1,7 @@
 package com.lcz.web.dto;
 
 /**
- * 
+ *
  */
 public class SubwayStationDTO {
     private Long id;
